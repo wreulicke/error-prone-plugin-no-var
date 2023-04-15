@@ -1,0 +1,38 @@
+{
+  "devDependencies": {
+    "commitlint": "17.6.1",
+    "conventional-changelog-conventionalcommits": "5.0.0",
+    "gradle-semantic-release-plugin": "1.7.6",
+    "husky": "^8.0.3",
+    "lint-staged": "13.2.1",
+    "prettier": "2.8.7",
+    "semantic-release": "^20.0.0"
+  },
+  "lint-staged": {
+    "*.{md,json}": [
+      "prettier --write"
+    ],
+    "*": [
+      "git secrets --register-aws",
+      "git secrets --scan"
+    ]
+  },
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      "@semantic-release/github",
+      "gradle-semantic-release-plugin"
+    ]
+  },
+  "engines": {
+    "node": "^18.0.0"
+  },
+  "scripts": {
+    "prepare": "husky install"
+  }
+}
