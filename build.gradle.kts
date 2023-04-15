@@ -57,8 +57,8 @@ val createJavadocOptionFile by tasks.registering {
 
 tasks {
     withType<JavaCompile>() {
-        sourceCompatibility = "11"
-        targetCompatibility = "11"
+        sourceCompatibility = "17"
+        targetCompatibility = "17"
         options.compilerArgs.addAll(exportsArgs)
         // disable warnings in generated code by immutables
         // https://github.com/google/error-prone/issues/329
@@ -74,7 +74,8 @@ tasks {
         useJUnitPlatform()
         // Starting in JDK 16 the default disallows access to internal javac APIs
         // https://github.com/google/error-prone/pull/2015
-        jvmArgs = exportsArgs
+
+        jvmArgs = exportsArgs + listOf("--add-opens", "jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED")
     }
 
     check {
